@@ -1,0 +1,13 @@
+{
+  "name": "FoxKit",
+  "version": "0.3.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . dev"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "sharp": "^0.33.5"
+  }
+}

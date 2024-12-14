@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+  </head>
+  <body id="foxkit">
+    <audio id="screenshotSuccessAudio" src="screenshot-success.wav"></audio>
+    <audio id="screenshotFailureAudio" src="screenshot-failure.wav"></audio>
+    <div id="panelWrapper">
+      <div id="menuButtonsWrapper">
+        <div id="playMenuButton" class="menuButton"></div>
+        <div id="hiscoresMenuButton" class="menuButton"></div>
+        <div id="settingsMenuButton" class="menuButton"></div>
+      </div>
+      <div id="menuDisplayAreaWrapper">
+        <div id="playDisplayArea" class="menuDisplayArea hidden">
+          <div id="playButton" class="displayAreaHalfWidthElement floatLeft centerText">Play</div>
+          <div id="playtimeDisplay" class="displayAreaHalfWidthElement floatRight centerText">00:00:00</div>
+        </div>
+        <div id="hiscoresDisplayArea" class="menuDisplayArea hidden">
+<!-- Temporarily have these here just to see how zoom affects their visuals -->
+<img src="icons/625-attack.png">50
+<img src="icons/625-hitpoints.png">50
+<img src="icons/625-mining.png">50<br>
+<img src="icons/625-strength.png">50
+<img src="icons/625-agility.png">50
+<img src="icons/625-smithing.png">50<br>
+<img src="icons/625-defence.png">50
+<img src="icons/625-herblore.png">50
+<img src="icons/625-fishing.png">50<br>
+<img src="icons/625-ranged.png">50
+<img src="icons/625-thieving.png">50
+<img src="icons/625-cooking.png">50<br>
+<img src="icons/625-prayer.png">50
+<img src="icons/625-crafting.png">50
+<img src="icons/625-firemaking.png">50<br>
+<img src="icons/625-magic.png">50
+<img src="icons/625-fletching.png">50
+<img src="icons/625-woodcutting.png">50<br>
+<img src="icons/625-runecraft.png">50
+        </div>
+        <div id="settingsDisplayArea" class="menuDisplayArea noSelect hidden">
+          <div class="displayAreaFullWidthElement centerText defaultCursor" style="margin-top: 10px; color: #a0a0a0;"><strong>Webview settings</strong></div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingRemoveBanner" type="checkbox">
+            <label for="settingRemoveBanner">Remove banner</label>
+          </div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingRemoveClientPadding" type="checkbox">
+            <label for="settingRemoveClientPadding">Remove client padding</label>
+          </div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingHideScrollbars" type="checkbox">
+            <label for="settingHideScrollbars">Hide scrollbars</label>
+          </div>
+          <div class="displayAreaFullWidthElement centerText defaultCursor" style="margin-top: 10px; color: #a0a0a0;"><strong>FoxKit settings</strong></div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingPixelatedImages" type="checkbox">
+            <label for="settingPixelatedImages">Pixelate images</label>
+          </div>
+          <div class="displayAreaFullWidthElement centerText defaultCursor" style="margin-top: 10px; color: #a0a0a0;"><strong>Screenshot settings</strong></div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingScreenshotEntireWindow" type="checkbox" disabled>
+            <label for="settingScreenshotEntireWindow">Screenshot entire window</label>
+          </div>
+          <div class="displayAreaFullWidthElement">
+            <input id="settingScreenshotPath" style="display: none;" type="file" true webkitdirectory directory multiple disabled>
+            <label for="settingScreenshotPath">Set screenshot folder</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
