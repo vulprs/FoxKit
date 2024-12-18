@@ -19,6 +19,11 @@ body{
 	background-color: #141414;
 }
 
+#panelSpacer{
+	height: 5px;
+	width: 100%;
+}
+
 #menuButtonsWrapper{
 	width: 30px;
 	height: 100%;
