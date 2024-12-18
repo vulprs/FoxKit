@@ -193,7 +193,7 @@ function add_hotkey_handlers_to_view(view){
 		}else if(input.type === 'keyUp' && input.control && input.key === '0'){
 			// Ctrl+0 - reset zoom for the selected view
 			view_set_zoom(this, 1);
-		}else if(/*developer_mode === true &&*/ input.type === 'keyUp' && input.control && input.shift && input.key.toLowerCase() === 'i'){
+		}else if(developer_mode === true && input.type === 'keyUp' && input.control && input.shift && input.key.toLowerCase() === 'i'){
 			// Ctrl+Shift+i - open dev console (only if in dev mode, not production)
 			this.isDevToolsOpened() ? this.closeDevTools() : this.openDevTools();
 		}else if(input.type ==='keyDown' && input.key.toLowerCase() === 'f11'){
