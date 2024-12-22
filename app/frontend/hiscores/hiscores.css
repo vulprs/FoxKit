@@ -1,0 +1,82 @@
+
+#hiscoresLookup{
+	width: 225px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background-color: #222222;
+}
+
+#hiscoresUsernameText{
+	margin-left: 10px;
+	font-size: 15px;
+}
+
+#hiscoresUsernameInput{
+	background-color: #141414;
+	border: none;
+	color: #888888;
+	margin-left: 4px;
+	width: 125px;
+	height: 16px;
+	padding-left: 4px;
+	font-size: 12px;
+	outline: none;
+}
+
+#hiscoresLoadingFeedback{
+	display: inline-block;
+	margin-left: 10px;
+	font-size: 13px;
+}
+
+#hiscoresSkillsArea{
+	width: 215px;
+	margin-top: 7px;
+	margin-left: 14px;
+}
+
+.hiscoreSkill{
+	display: inline-block;
+	margin-top: 1px;
+	height: 25px;
+	width: 68px;
+	vertical-align: middle;
+	font-size: 15px;
+}
+
+.hiscoresSkillImage{
+	vertical-align: middle;
+	width: 25px;
+	height: 25px;
+}
+
+#hiscoresDetailsArea{
+	margin-top: 22px;
+	margin-left: 4px;
+	width: 215px;
+	font-size: 14px;
+}
+
+#hiscoreDetailProgressBarContainer{
+	position: relative;
+	margin-top: 4px;
+	width: 215px;
+	height: 16px;
+	background-color: #741111;
+	opacity: 0;
+}
+
+#hiscoreDetailProgressBarText{
+	position: absolute;
+	color: #FFFFFF;
+	width: 215px;
+	text-align: center;
+	font-size: 12px;
+	z-index: 10;
+}
+
+#hiscoreDetailProgressBar{
+	width: 0%;
+	background-color: #3E8F22;
+	height: 16px;
+}

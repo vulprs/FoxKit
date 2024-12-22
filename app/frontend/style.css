@@ -2,7 +2,7 @@
 body{
 	margin: 0;
 	paddin: 0;
-	font-family: sans-serif;
+	font-family: 'PT Sans', sans-serif;
 	font-size: 16px;
 	background-color: #1b1b1b;
 }
@@ -20,7 +20,7 @@ body{
 }
 
 #panelSpacer{
-	height: 5px;
+	height: 4px;
 	width: 100%;
 }
 
@@ -67,7 +67,7 @@ body{
     display: none;
 }
 .menuDisplayArea{
-	margin: 5px;
+	margin: 4px;
 }
 .hidden{
 	display: none;
@@ -77,15 +77,15 @@ body{
 	text-align: center;
 }
 .displayAreaHalfWidthElement{
-	width: 115px;
-	height: 19px;
+	width: 103px;
+	height: 21px;
 	padding: 4px;
 	border-radius: 1px;
 	background-color: #222222;
 }
 .displayAreaFullWidthElement{
-	width: 242px;
-	height: 19px;
+	width: 217px;
+	height: 21px;
 	padding: 4px;
 	margin-bottom: 4px;
 	border-radius: 1px;

@@ -3,8 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self'">
+    <link rel="stylesheet" href="fonts/style.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="hiscores/hiscores.css">
     <script src="main.js" defer></script>
+    <script src="hiscores/hiscores.js" defer></script>
   </head>
   <body id="foxkit">
     <audio id="screenshotSuccessAudio" src="screenshot-success.wav"></audio>
@@ -21,26 +24,103 @@
           <div id="playtimeDisplay" class="displayAreaHalfWidthElement floatRight centerText">00:00:00</div>
         </div>
         <div id="hiscoresDisplayArea" class="menuDisplayArea hidden">
-<!-- Temporarily have these here just to see how zoom affects their visuals -->
-<img src="icons/625-attack.png">50
-<img src="icons/625-hitpoints.png">50
-<img src="icons/625-mining.png">50<br>
-<img src="icons/625-strength.png">50
-<img src="icons/625-agility.png">50
-<img src="icons/625-smithing.png">50<br>
-<img src="icons/625-defence.png">50
-<img src="icons/625-herblore.png">50
-<img src="icons/625-fishing.png">50<br>
-<img src="icons/625-ranged.png">50
-<img src="icons/625-thieving.png">50
-<img src="icons/625-cooking.png">50<br>
-<img src="icons/625-prayer.png">50
-<img src="icons/625-crafting.png">50
-<img src="icons/625-firemaking.png">50<br>
-<img src="icons/625-magic.png">50
-<img src="icons/625-fletching.png">50
-<img src="icons/625-woodcutting.png">50<br>
-<img src="icons/625-runecraft.png">50
+          <div id="hiscoresLookup" class="noSelect">
+            <div>
+              <span id="hiscoresUsernameText">Username:</span>
+              <input id="hiscoresUsernameInput" type="text">
+            </div>
+            <div id="hiscoresLoadingFeedback"></div>
+            <div id="hiscoresSkillsArea">
+              <span class="hiscoreSkill" data-index="1">
+                <img src="icons/625-attack.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="2">
+                <img src="icons/625-hitpoints.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="3">
+                <img src="icons/625-mining.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="4">
+                <img src="icons/625-strength.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="5">
+                <img src="icons/625-agility.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="6">
+                <img src="icons/625-smithing.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="7">
+                <img src="icons/625-defence.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="8">
+                <img src="icons/625-herblore.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="9">
+                <img src="icons/625-fishing.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="10">
+                <img src="icons/625-ranged.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="11">
+                <img src="icons/625-thieving.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="12">
+                <img src="icons/625-cooking.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="13">
+                <img src="icons/625-prayer.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="14">
+                <img src="icons/625-crafting.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="15">
+                <img src="icons/625-firemaking.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="16">
+                <img src="icons/625-magic.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="17">
+                <img src="icons/625-fletching.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="18">
+                <img src="icons/625-woodcutting.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+              <span class="hiscoreSkill" data-index="19">
+                <img src="icons/625-runecraft.png" class="hiscoresSkillImage">
+                <span></span>
+              </span>
+            </div data-index="">
+            <div id="hiscoresDetailsArea">
+              <div id="hiscoreDetailRank">Rank:</div>
+              <div id="hiscoreDetailXp">Experience:</div>
+              <div id="hiscoreDetailXpToLevel">XP to level:</div>
+              <div id="hiscoreDetailProgressBarContainer">
+                <div id="hiscoreDetailProgressBarText"></div>
+                <div id="hiscoreDetailProgressBar"></div>
+              </div>
+              <div id="panelSpacer"></div>
+              <div id="hiscoreDetailOverall">Overall:</div>
+              <div id="hiscoreDetailCombat">Combat:</div>
+            </div>
+          </div>
         </div>
         <div id="settingsDisplayArea" class="menuDisplayArea noSelect hidden">
           <div id="panelSpacer"></div>

@@ -123,7 +123,7 @@ var Menu = {
 	update_side_panel_visibility: function(visible){
 		if(visible === true){
 			this.display_area.style.display = '';
-			window.api.resize_panel_width(290);
+			window.api.resize_panel_width(263);
 		}else{
 			this.display_area.style.display = 'none';
 			window.api.resize_panel_width(30);

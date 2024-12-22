@@ -7,7 +7,7 @@ const sharp = require('sharp');
 var main_window;
 var website_view;
 var foxkit_view;
-var side_panel_width = 290;
+var side_panel_width = 263;
 
 
 var developer_mode = false;
