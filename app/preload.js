@@ -1,6 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-var game_frame;
 var screenshot_success_audio;
 var screenshot_failure_audio;
 
@@ -26,7 +25,6 @@ contextBridge.exposeInMainWorld('api', {
 });
 
 window.onload = function(){
-	game_frame = document.getElementsByTagName('iframe')[0];
 	screenshot_success_audio = document.getElementById('screenshotSuccessAudio');
 	screenshot_failure_audio = document.getElementById('screenshotFailureAudio');
 	add_custom_css();
@@ -109,12 +107,13 @@ function remove_element(elm){
 }
 
 ipcRenderer.on('request-gameframe-position-for-screenshot', async function(){
-	var offset;
-	if(game_frame != null){
+	var offset = null;
+	var game_frame = get_game_frame();
+	if(game_frame !== null){
 		var frame_bounds = game_frame.getBoundingClientRect();
 		offset = {
 			left: frame_bounds.left,
-			top: frame_bounds.top,
+			top: frame_bounds.top
 		};
 	}
 	ipcRenderer.send('gameframe-position-for-screenshot', { offset: offset });
@@ -137,4 +136,14 @@ function play_audio(audio_elm){
 		audio_elm.currentTime = 0;
 	}
 	audio_elm.play();
+}
+
+function get_game_frame(){
+	if(check_webclient_page() === true){
+		// the client iframe _should_ always be the last iframe on the page
+		var iframes = document.getElementsByTagName('iframe');
+		return iframes[iframes.length - 1];
+	}else{
+		return null;
+	}
 }
