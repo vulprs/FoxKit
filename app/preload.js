@@ -7,6 +7,9 @@ contextBridge.exposeInMainWorld('api', {
 	load_settings: function(settings){
 		ipcRenderer.on('load-settings', settings);
 	},
+	update_setting: function(type, key, value){
+		ipcRenderer.on('update-setting', type, key, value);
+	},
 	load_website: function(){
 		ipcRenderer.send('load-website');
 	},
@@ -21,6 +24,12 @@ contextBridge.exposeInMainWorld('api', {
 	},
 	update_scrollbar_visibility: function(visible){
 		ipcRenderer.send('update-scrollbar-visibility', visible);
+	},
+	update_fkview_setting: function(key, value){
+		ipcRenderer.send('update-fkview-setting', key, value);
+	},
+	update_screenshot_save_location: function(options){
+		ipcRenderer.send('update-screenshot-save-location', options);
 	}
 });
 

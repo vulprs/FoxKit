@@ -1,71 +1,4 @@
 
-var Settings = {
-	items: {
-		webview: {
-			banner_visibility: {
-				setting_elm: 'settingRemoveBanner',
-				load: function(value){
-					document.getElementById(this.setting_elm).checked = !value;
-				},
-				update: function(){
-					var elm = document.getElementById(this.setting_elm);
-					window.api.update_banner_visibility(!elm.checked);
-				}
-			},
-			cellpadding_visibility: {
-				setting_elm: 'settingRemoveClientPadding',
-				load: function(value){
-					document.getElementById(this.setting_elm).checked = !value;
-				},
-				update: function(){
-					var elm = document.getElementById(this.setting_elm);
-					window.api.update_cellpadding_visibility(!elm.checked);
-				}
-			},
-			scrollbar_visibility: {
-				setting_elm: 'settingHideScrollbars',
-				load: function(value){
-					document.getElementById(this.setting_elm).checked = !value;
-				},
-				update: function(){
-					var elm = document.getElementById(this.setting_elm);
-					window.api.update_scrollbar_visibility(!elm.checked);
-				}
-			}
-		},
-		fkview: {
-			pixelated_images: {
-				setting_elm: 'settingPixelatedImages',
-				load: function(value){
-					document.getElementById(this.setting_elm).checked = value;
-					this.update();
-				},
-				update: function(){
-					var elm = document.getElementById(this.setting_elm);
-					if(elm.checked === true){
-						panelWrapper.classList.add('pixelated');
-					}else{
-						panelWrapper.classList.remove('pixelated');
-					}
-				}
-			}
-		}
-	},
-	load: function(settings){
-		for(var category_key in settings){
-			for(var item_key in settings[category_key]){
-				var elm = document.getElementById(this.items[category_key][item_key].setting_elm);
-				elm.fk = {
-					category: category_key,
-					item: item_key
-				}
-				elm.addEventListener('change', function(){ Settings.items[this.fk.category][this.fk.item].update(Settings.items[this.fk.category][this.fk.item]); });
-				this.items[category_key][item_key].load(settings[category_key][item_key]);
-			}
-		}
-	}
-}
-
 var Menu = {
 	display_area: document.getElementById('menuDisplayAreaWrapper'),
 	selected: 'play',
@@ -163,10 +96,6 @@ var Playtime = {
 
 document.getElementById('playButton').addEventListener('click', function(event){
 	window.api.load_website();
-});
-
-window.api.load_settings(function(event, settings){
-	Settings.load(settings);
 });
 
 Menu.load();

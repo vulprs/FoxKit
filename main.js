@@ -1,13 +1,17 @@
-const { app, BaseWindow, WebContentsView, ipcMain, session, desktopCapturer } = require('electron/main');
+const { app, BaseWindow, WebContentsView, ipcMain, session, desktopCapturer, dialog } = require('electron/main');
 const process = require('node:process');
 const path = require('node:path');
 const fs = require('node:fs');
 const sharp = require('sharp');
+const homedir = require('os').homedir();
 
 var main_window;
 var website_view;
 var foxkit_view;
 var side_panel_width = 263;
+var foxkit_dir = '.foxkit';
+
+var Settings;
 
 
 var developer_mode = false;
@@ -30,6 +34,46 @@ function launch_dummy_webpage_for_testing(){
 		global.DEV_SERVER_PORT = dev_server.address().port;
 		console.log('Local web server setup on port: ' + global.DEV_SERVER_PORT);
 	});
+}
+
+function load_settings(){
+	if(homedir == null || homedir.length <= 0){
+		console.error("Couldn't find a valid home directory..?" + '\n' + homedir);
+		process.exit(1);
+	}else{
+
+		// first lets check if a `.foxkit` directory already exists on the system
+		var fkd = path.join(homedir, foxkit_dir);
+		if(fs.existsSync(fkd) === false){
+			console.log('Settings directory not found, creating..');
+			fs.mkdirSync(fkd);
+			fs.mkdirSync(path.join(fkd, 'screenshots'));
+			console.log('Settings directory created at: ' + fkd);
+		}
+
+		// now we'll check for a settings file
+		var settings_file_path = path.join(fkd, 'profiles', 'default.json');
+		if(fs.existsSync(settings_file_path) === false){
+			// no settings file to load, use default settings instead
+			Settings = get_default_settings();
+		}else{
+			console.log('Loading settings from: ' + settings_file_path);
+			try{
+				// it's possible that FoxKit has updated and added new default settings
+				// we should attempt to merge these settings with the default settings to ensure that it stays up to date
+				Settings = merge_settings_with_defaults(JSON.parse(fs.readFileSync(settings_file_path)));
+			}catch(error){
+				console.error(error);
+				console.error('Error while attempting to load settings file: `' + settings_file_path + '`'
+					+ '\nEnsure that the JSON is valid, or simply delete the file to reset all settings.');
+				process.exit(2);
+			}
+		}
+	}
+}
+
+function update_setting(type, key, value){
+	foxkit_view.webContents.send('update-setting', type, key, value);
 }
 
 function create_window(){
@@ -71,6 +115,7 @@ function load_website(){
 }
 
 app.whenReady().then(function(){
+	load_settings();
 	setup_session();
 	create_window();
 	app.on('activate', function(){
@@ -81,13 +126,7 @@ app.whenReady().then(function(){
 });
 
 app.on('window-all-closed', function(){
-	if(process.platform !== 'darwin'){
-		app.quit();
-	}else{
-		website_view = undefined;
-		foxkit_view = undefined;
-		main_window = undefined;
-	}
+	app.quit();
 });
 
 function setup_session(){
@@ -127,20 +166,6 @@ function setup_session(){
 			});
 		}
 	});
-}
-
-// temp.. settings will eventually save/load from disk
-// temp.. settings will eventually save/load from disk
-// temp.. settings will eventually save/load from disk
-var Settings = {
-	webview: {
-		banner_visibility: true,
-		cellpadding_visibility: true,
-		scrollbar_visibility: true
-	},
-	fkview: {
-		pixelated_images: false
-	}
 }
 
 ipcMain.on('view-loaded', function(event, view){
@@ -185,10 +210,10 @@ function add_hotkey_handlers_to_view(view){
 		if(input.type === 'keyDown' && input.key.toLowerCase() === 'f12'){
 			// F12 - take screenshot
 			// we should probably allow screenshot to be reassigned or even un-mapped, but for now we'll just leave it on F12
-			if(true){	// TODO - switch this to a setting on whether the entire window should be captured, or just the game itself
-				website_view.webContents.send('request-gameframe-position-for-screenshot');
-			}else{
+			if(Settings.fkview.screenshot_entire_window === true){
 				take_screenshot();
+			}else{
+				website_view.webContents.send('request-gameframe-position-for-screenshot');
 			}
 		}else if(input.type === 'keyUp' && input.control && input.key === '0'){
 			// Ctrl+0 - reset zoom for the selected view
@@ -267,29 +292,100 @@ function take_screenshot(sub_bounds){
 			}
 
 			var screenshot_name = 'screenshot-' + Date.now() + '.png';
-			fs.writeFileSync(screenshot_name, output_image);
+			var screenshot_path = path.join(Settings.fkview.screenshot_save_location, screenshot_name);
+			fs.writeFileSync(screenshot_path, output_image);
 			foxkit_view.webContents.send('screenshot-feedback', {
 				type: 'success',
 				img: output_image
 			});
 		}catch(error){
-			console.log(error);
+			console.error(error);
 			foxkit_view.webContents.send('screenshot-feedback', { type: 'failure' });
 		}
 	});
 }
 
+function get_default_settings(){
+	return {
+		webview: {
+			banner_visibility: true,
+			cellpadding_visibility: true,
+			scrollbar_visibility: true
+		},
+		fkview: {
+			pixelated_images: false,
+			screenshot_entire_window: false,
+			screenshot_save_location: path.join(homedir, foxkit_dir, 'screenshots')
+		}
+	};
+}
+
+function merge_settings_with_defaults(settings){
+	var default_settings = get_default_settings();
+	for(var category in default_settings){
+		// ensure the category exists
+		if(settings[category] === undefined){
+			settings[category] = {};
+		}
+		for(var setting in default_settings[category]){
+			if(settings[category][setting] === undefined){
+				// found an undefined setting, lets merge the default setting in
+				settings[category][setting] = default_settings[category][setting];
+			}
+		}
+	}
+	return settings;
+}
+
+function save_settings(){
+	// first lets make sure the path `.foxkit/profiles` exists
+	var profiles_path = path.join(homedir, foxkit_dir, 'profiles');
+	if(fs.existsSync(profiles_path) === false){
+		fs.mkdirSync(profiles_path, { recursive: true });
+	}
+	// then we'll write the settings to disk
+	var filename = path.join(profiles_path, 'default.json');
+	var formatted_settings = JSON.stringify(Settings, null, 2);
+	fs.writeFileSync(filename, formatted_settings);
+}
+
+async function choose_screenshot_save_location(){
+	var result = await dialog.showOpenDialog({ properties: ['openDirectory', 'showHiddenFiles'] });
+	if(result.canceled === false){
+		Settings.fkview.screenshot_save_location = result.filePaths[0];
+		save_settings();
+	}
+}
+
 ipcMain.on('update-banner-visibility', function(event, visible){
 	Settings.webview.banner_visibility = visible;
 	website_view.webContents.send('set-banner-visibility', Settings.webview.banner_visibility);
+	save_settings();
 });
 
 ipcMain.on('update-cellpadding-visibility', function(event, visible){
 	Settings.webview.cellpadding_visibility = visible;
 	website_view.webContents.send('set-cellpadding-visibility', Settings.webview.cellpadding_visibility);
+	save_settings();
 });
 
 ipcMain.on('update-scrollbar-visibility', function(event, visible){
 	Settings.webview.scrollbar_visibility = visible;
 	website_view.webContents.send('set-scrollbar-visibility', Settings.webview.scrollbar_visibility);
+	save_settings();
+});
+
+ipcMain.on('update-fkview-setting', function(event, key, value){
+	Settings.fkview[key] = value;
+	save_settings();
+});
+
+ipcMain.on('update-screenshot-save-location', async function(event, options){
+	if(options != null && options.type === 'path'){
+		Settings.fkview.screenshot_save_location = options.path;
+		save_settings();
+	}else{
+		await choose_screenshot_save_location();
+	}
+	update_setting('fkview', 'screenshot_save_location', Settings.fkview.screenshot_save_location);
 });
