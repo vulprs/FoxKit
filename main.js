@@ -131,12 +131,12 @@ app.on('window-all-closed', function(){
 
 function setup_session(){
 	var regex_trusted_hosts = [
-		/^file:\/\/\//,										// this matches local files like `file:///etc/example.png`
-		/^http:\/\/localhost:[0-9]+/,						// this matches local files like `http://localhost:12345/example.png`
-		/^devtools:\/\/devtools\//,							// this matches the devtools that are used when opening the developer console in electron
-		/^https:\/\/www.2004scape.org\//,					// match the main website
-		/^https:\/\/w[0-9]+.[0-9]+.2004scape.org\//,		// this will match http traffic for any combination of worlds/revs
-		/^wss:\/\/w[0-9]+.[0-9]+.2004scape.org:[0-9]+\//	// this will match web socket connections for any combination of worlds/revs/ports
+		/^file:\/\/\//,                                         // this matches local files like `file:///etc/example.png`
+		/^http:\/\/localhost:[0-9]+/,                           // this matches local files like `http://localhost:12345/example.png`
+		/^devtools:\/\/devtools\//,                             // this matches the devtools that are used when opening the developer console in electron
+		/^https:\/\/www.2004scape.org\//,                       // match the main website
+		/^https:\/\/w[0-9]+.[0-9]+.2004scape.org(:[0-9]+)?\//,  // this will match http traffic for any combination of worlds/revs/ports
+		/^wss:\/\/w[0-9]+.[0-9]+.2004scape.org:[0-9]+\//        // this will match web socket connections for any combination of worlds/revs/ports
 	];
 
 	session.defaultSession.webRequest.onHeadersReceived(function(details, callback){
