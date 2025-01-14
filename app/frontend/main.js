@@ -12,6 +12,10 @@ var Menu = {
 			button_elm: document.getElementById('hiscoresMenuButton'),
 			display_elm: document.getElementById('hiscoresDisplayArea')
 		},{
+			name: 'world',
+			button_elm: document.getElementById('worldMenuButton'),
+			display_elm: document.getElementById('worldDisplayArea')
+		},{
 			name: 'settings',
 			button_elm: document.getElementById('settingsMenuButton'),
 			display_elm: document.getElementById('settingsDisplayArea')
@@ -95,7 +99,7 @@ var Playtime = {
 }
 
 document.getElementById('playButton').addEventListener('click', function(event){
-	window.api.load_website();
+	window.api.load_website('https://www.2004scape.org/title');
 });
 
 Menu.load();

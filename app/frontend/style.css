@@ -58,6 +58,9 @@ input{
 #settingsMenuButton{
 	background-image: url("icons/900-settings.png");
 }
+#worldMenuButton{
+	background-image: url("icons/900-music.png"); /* using the music icon until I figure out what I really want to use here */
+}
 #hiscoresMenuButton{
 	background-image: url("icons/900-hiscores.png");
 }

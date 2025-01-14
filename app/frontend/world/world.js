@@ -1,0 +1,22 @@
+
+document.getElementById('worldDisplayArea').addEventListener('click', function(event){
+	if(event.target && event.target.matches("input[type='radio']")){
+		if(event.target.value === 'hd-w1'){
+			window.api.load_website('https://www.2004scape.org/client?world=1&detail=high&method=0');
+		}else if(event.target.value === 'hd-w2'){
+			window.api.load_website('https://www.2004scape.org/client?world=2&detail=high&method=0');
+		}else if(event.target.value === 'hd-w3'){
+			window.api.load_website('https://www.2004scape.org/client?world=3&detail=high&method=0');
+		}else if(event.target.value === 'hd-w4'){
+			window.api.load_website('https://www.2004scape.org/client?world=4&detail=high&method=0');
+		}else if(event.target.value === 'ld-w1'){
+			window.api.load_website('https://www.2004scape.org/client?world=1&detail=low&method=0');
+		}else if(event.target.value === 'ld-w2'){
+			window.api.load_website('https://www.2004scape.org/client?world=2&detail=low&method=0');
+		}else if(event.target.value === 'ld-w3'){
+			window.api.load_website('https://www.2004scape.org/client?world=3&detail=low&method=0');
+		}else if(event.target.value === 'ld-w4'){
+			window.api.load_website('https://www.2004scape.org/client?world=4&detail=low&method=0');
+		}
+	}
+});

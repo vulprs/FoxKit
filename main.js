@@ -83,7 +83,7 @@ function create_window(){
 		minHeight: 532,
 		width: 1079,
 		height: 532,
-		icon: path.join(__dirname, 'temp-icon.png')
+		icon: path.join(__dirname, 'icon.png')
 	});
 	main_window.removeMenu();
 	main_window.maximize();
@@ -103,14 +103,14 @@ function create_window(){
 	foxkit_view.webContents.once('did-finish-load', reposition_views);
 	foxkit_view.webContents.fk_id = 'foxkit';
 
-	load_website();
+	load_website('https://www.2004scape.org/title');
 }
 
-function load_website(){
+function load_website(url){
 	if(developer_mode === true){
 		website_view.webContents.loadURL('http://localhost:' + global.DEV_SERVER_PORT);
 	}else{
-		website_view.webContents.loadURL('https://www.2004scape.org/title');
+		website_view.webContents.loadURL(url);
 	}
 }
 
@@ -233,8 +233,8 @@ function get_main_window(){
 	return BaseWindow.getAllWindows()[0];
 }
 
-ipcMain.on('load-website', function(){
-	load_website();
+ipcMain.on('load-website', function(event, url){
+	load_website(url);
 });
 
 ipcMain.on('resize-panel-width', function(event, width){

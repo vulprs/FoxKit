@@ -10,8 +10,8 @@ contextBridge.exposeInMainWorld('api', {
 	update_setting: function(type, key, value){
 		ipcRenderer.on('update-setting', type, key, value);
 	},
-	load_website: function(){
-		ipcRenderer.send('load-website');
+	load_website: function(url){
+		ipcRenderer.send('load-website', url);
 	},
 	resize_panel_width: function(width){
 		ipcRenderer.send('resize-panel-width', width);
