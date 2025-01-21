@@ -103,7 +103,7 @@ function create_window(){
 	foxkit_view.webContents.once('did-finish-load', reposition_views);
 	foxkit_view.webContents.fk_id = 'foxkit';
 
-	load_website('https://www.2004scape.org/title');
+	load_website('https://2004.lostcity.rs/title');
 }
 
 function load_website(url){
@@ -134,7 +134,7 @@ function setup_session(){
 		/^file:\/\/\//,                                         // this matches local files like `file:///etc/example.png`
 		/^http:\/\/localhost:[0-9]+/,                           // this matches local files like `http://localhost:12345/example.png`
 		/^devtools:\/\/devtools\//,                             // this matches the devtools that are used when opening the developer console in electron
-		/^https:\/\/www.2004scape.org\//,                       // match the main website
+		/^https:\/\/2004.lostcity.rs\//,                        // match the main website
 		/^https:\/\/w[0-9]+.[0-9]+.2004scape.org(:[0-9]+)?\//,  // this will match http traffic for any combination of worlds/revs/ports
 		/^wss:\/\/w[0-9]+.[0-9]+.2004scape.org:[0-9]+\//        // this will match web socket connections for any combination of worlds/revs/ports
 	];
@@ -218,8 +218,7 @@ function add_hotkey_handlers_to_view(view){
 		}else if(input.type === 'keyUp' && input.control && input.key === '0'){
 			// Ctrl+0 - reset zoom for the selected view
 			view_set_zoom(this, 1);
-		}else if(developer_mode === true && input.type === 'keyUp' && input.control && input.shift && input.key.toLowerCase() === 'i'){
-			// Ctrl+Shift+i - open dev console (only if in dev mode, not production)
+		}else if(input.type === 'keyUp' && input.control && input.shift && input.key.toLowerCase() === 'i'){
 			this.isDevToolsOpened() ? this.closeDevTools() : this.openDevTools();
 		}else if(input.type ==='keyDown' && input.key.toLowerCase() === 'f11'){
 			// F11 - toggle windowed borderless

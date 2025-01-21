@@ -99,7 +99,7 @@ var Playtime = {
 }
 
 document.getElementById('playButton').addEventListener('click', function(event){
-	window.api.load_website('https://www.2004scape.org/title');
+	window.api.load_website('https://2004.lostcity.rs/title');
 });
 
 Menu.load();

@@ -73,7 +73,7 @@ function add_custom_css(){
 
 function check_webclient_page(){
 	var regex_matching_urls = [
-		/^https:\/\/www.2004scape.org\/client\?world=[0-9]+&detail=(low|high)&method=[0-9]+/,	// should match any webclient page
+		/^https:\/\/2004.lostcity.rs\/client\?world=[0-9]+&detail=(low|high)&method=[0-9]+/,	// should match any webclient page
 		/^http:\/\/localhost:[0-9]+/															// matches our local test page
 	];
 	return regex_matching_urls.some(function(rx){
