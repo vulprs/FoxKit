@@ -135,8 +135,10 @@ function setup_session(){
 		/^http:\/\/localhost:[0-9]+/,                           // this matches local files like `http://localhost:12345/example.png`
 		/^devtools:\/\/devtools\//,                             // this matches the devtools that are used when opening the developer console in electron
 		/^https:\/\/2004.lostcity.rs\//,                        // match the main website
-		/^https:\/\/w[0-9]+.[0-9]+.2004scape.org(:[0-9]+)?\//,  // this will match http traffic for any combination of worlds/revs/ports
-		/^wss:\/\/w[0-9]+.[0-9]+.2004scape.org:[0-9]+\//        // this will match web socket connections for any combination of worlds/revs/ports
+		/^https:\/\/w[0-9]+.[0-9]+.2004scape.org(:[0-9]+)?\//,  // I imagine these old ones will get replaced at some point, but are still in use atm
+		/^wss:\/\/w[0-9]+.[0-9]+.2004scape.org:[0-9]+\//,       // I imagine these old ones will get replaced at some point, but are still in use atm
+		/^https:\/\/w[0-9]+.[0-9]+.lostcity.rs(:[0-9]+)?\//,    // this will match http traffic for any combination of worlds/revs/ports
+		/^wss:\/\/w[0-9]+.[0-9]+.lostcity.rs:[0-9]+\//          // this will match web socket connections for any combination of worlds/revs/ports
 	];
 
 	session.defaultSession.webRequest.onHeadersReceived(function(details, callback){
