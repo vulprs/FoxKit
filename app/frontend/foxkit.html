@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="hiscores/hiscores.css">
     <script src="hiscores/hiscores.js" defer></script>
-    <script src="world/world.js" defer></script>
     <script src="settings/settings.js" defer></script>
     <script src="main.js" defer></script>
   </head>
@@ -18,7 +17,6 @@
       <div id="menuButtonsWrapper">
         <div id="playMenuButton" class="menuButton"></div>
         <div id="hiscoresMenuButton" class="menuButton"></div>
-        <div id="worldMenuButton" class="menuButton"></div>
         <div id="settingsMenuButton" class="menuButton"></div>
       </div>
       <div id="menuDisplayAreaWrapper">
@@ -125,61 +123,6 @@
               <div id="hiscoreDetailOverall">Overall:</div>
               <div id="hiscoreDetailCombat">Combat:</div>
             </div>
-          </div>
-        </div>
-        <div id="worldDisplayArea" class="menuDisplayArea noSelect hidden">
-          <!-- the whole world selection needs to be rewritten at some point, just wanted to hack together something quick and functional for the moment.. -->
-          <div id="panelSpacer"></div>
-          <div class="displayAreaFullWidthElement centerText defaultCursor" style="color: #a0a0a0;"><strong>High detail</strong></div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w1" type="radio" name="world" value="hd-w1" />
-            <label for="hd-w1">World 1</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w2" type="radio" name="world" value="hd-w2" />
-            <label for="hd-w2">World 2</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w3" type="radio" name="world" value="hd-w3" />
-            <label for="hd-w3">World 3</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w4" type="radio" name="world" value="hd-w4" />
-            <label for="hd-w4">World 4</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w5" type="radio" name="world" value="hd-w5" />
-            <label for="hd-w5">World 5</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="hd-w6" type="radio" name="world" value="hd-w6" />
-            <label for="hd-w6">World 6</label>
-          </div>
-          <div id="panelSpacer"></div>
-          <div class="displayAreaFullWidthElement centerText defaultCursor" style="color: #a0a0a0;"><strong>Low detail</strong></div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w1" type="radio" name="world" value="ld-w1" />
-            <label for="ld-w1">World 1</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w2" type="radio" name="world" value="ld-w2" />
-            <label for="ld-w2">World 2</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w3" type="radio" name="world" value="ld-w3" />
-            <label for="ld-w3">World 3</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w4" type="radio" name="world" value="ld-w4" />
-            <label for="ld-w4">World 4</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w5" type="radio" name="world" value="ld-w5" />
-            <label for="ld-w5">World 5</label>
-          </div>
-          <div class="displayAreaFullWidthElement">
-            <input id="ld-w6" type="radio" name="world" value="ld-w6" />
-            <label for="ld-w6">World 6</label>
           </div>
         </div>
         <div id="settingsDisplayArea" class="menuDisplayArea noSelect hidden">

@@ -12,10 +12,6 @@ var Menu = {
 			button_elm: document.getElementById('hiscoresMenuButton'),
 			display_elm: document.getElementById('hiscoresDisplayArea')
 		},{
-			name: 'world',
-			button_elm: document.getElementById('worldMenuButton'),
-			display_elm: document.getElementById('worldDisplayArea')
-		},{
 			name: 'settings',
 			button_elm: document.getElementById('settingsMenuButton'),
 			display_elm: document.getElementById('settingsDisplayArea')
