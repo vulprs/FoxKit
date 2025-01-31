@@ -177,8 +177,8 @@ ipcMain.on('view-loaded', function(event, view){
 	}else{
 		// website
 		website_view.webContents.send('set-banner-visibility', Settings.webview.banner_visibility);
-		website_view.webContents.send('set-cellpadding-visibility', Settings.webview.cellpadding_visibility);
-		website_view.webContents.send('set-scrollbar-visibility', Settings.webview.scrollbar_visibility);
+		// website_view.webContents.send('set-cellpadding-visibility', Settings.webview.cellpadding_visibility);
+		// website_view.webContents.send('set-scrollbar-visibility', Settings.webview.scrollbar_visibility);
 	}
 });
 

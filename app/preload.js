@@ -42,19 +42,19 @@ window.onload = function(){
 
 ipcRenderer.on('set-banner-visibility', function(event, visible){
 	if(check_webclient_page() === true){
-		document.getElementsByTagName('tr')[0].style.display = (visible ? '' : 'none');
+		document.getElementById('gameframe-top').style.display = (visible ? '' : 'none');
 	}
 });
 
 var original_cellpadding;
 ipcRenderer.on('set-cellpadding-visibility', function(event, visible){
-	if(check_webclient_page() === true){
-		var elm = document.getElementsByTagName('table')[0];
-		if(original_cellpadding === undefined){
-			original_cellpadding = elm.cellPadding;
-		}
-		elm.cellPadding = (visible ? original_cellpadding : 0);
-	}
+	// if(check_webclient_page() === true){
+	// 	var elm = document.getElementsByTagName('table')[0];
+	// 	if(original_cellpadding === undefined){
+	// 		original_cellpadding = elm.cellPadding;
+	// 	}
+	// 	elm.cellPadding = (visible ? original_cellpadding : 0);
+	// }
 });
 
 ipcRenderer.on('set-scrollbar-visibility', function(event, visible){
@@ -116,16 +116,17 @@ function remove_element(elm){
 }
 
 ipcRenderer.on('request-gameframe-position-for-screenshot', async function(){
-	var offset = null;
-	var game_frame = get_game_frame();
-	if(game_frame !== null){
-		var frame_bounds = game_frame.getBoundingClientRect();
-		offset = {
-			left: frame_bounds.left,
-			top: frame_bounds.top
-		};
-	}
-	ipcRenderer.send('gameframe-position-for-screenshot', { offset: offset });
+	// var offset = null;
+	// var game_frame = get_game_frame();
+	// if(game_frame !== null){
+	// 	var frame_bounds = game_frame.getBoundingClientRect();
+	// 	offset = {
+	// 		left: frame_bounds.left,
+	// 		top: frame_bounds.top
+	// 	};
+	// }
+	// ipcRenderer.send('gameframe-position-for-screenshot', { offset: offset });
+	ipcRenderer.send('gameframe-position-for-screenshot', { offset: { left: 3, top: 0 } }); // hard coding this for now because I no longer have access to the canvas position to calculate the screen offset...
 });
 
 ipcRenderer.on('screenshot-feedback', function(event, data){
